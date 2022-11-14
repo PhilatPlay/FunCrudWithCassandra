@@ -91,7 +91,7 @@ public class ContributionController {
     }
 
 
-    @DeleteMapping("/api/contributions/{id}")
+    @DeleteMapping("/contributions/{id}")
     public ResponseEntity<HttpStatus> deleteContribution(@PathVariable("id") UUID id) {
         try {
             service.deleteContributionById(id);
