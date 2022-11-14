@@ -16,13 +16,13 @@ import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/contributions")
 public class ContributionController {
 
     @Autowired
     ContributionService service;
 
-    @PostMapping("/contributions")
+    @PostMapping
     public ResponseEntity<Contribution> createContribution(@RequestBody Contribution contribution) {
         try {
             Contribution _contribution = service.saveContribution(
@@ -39,7 +39,7 @@ public class ContributionController {
         }
     }
 
-    @GetMapping("/contributions")
+    @GetMapping
     public ResponseEntity<List<Contribution>> getAllContributions(@RequestParam(required = false) String candidate){
         try {
             List<Contribution> contributions = new ArrayList<>();
@@ -58,7 +58,7 @@ public class ContributionController {
         }
     }
 
-    @GetMapping("/contributions/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Contribution> getContributionById(@PathVariable("id") UUID id) {
 
         Optional<Contribution> contribution = service.findContributionById(id);
@@ -70,7 +70,7 @@ public class ContributionController {
         }
     }
 
-    @PutMapping
+    @PutMapping("{id}")
     public ResponseEntity<Contribution> updateContribution(@PathVariable("id") UUID id,
                                                            @RequestBody Contribution contribution) {
         Optional<Contribution> theContribution = service.findContributionById(id);
@@ -91,7 +91,7 @@ public class ContributionController {
     }
 
 
-    @DeleteMapping("/contributions/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteContribution(@PathVariable("id") UUID id) {
         try {
             service.deleteContributionById(id);
